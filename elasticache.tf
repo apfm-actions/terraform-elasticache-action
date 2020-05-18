@@ -3,7 +3,9 @@ locals {
   engine_version = var.engine_version != "" ? var.engine_version : local.default_engine_version
 
   node_type  = var.node_type != "" ? var.node_type : "cache.t2.micro"
-  node_count = var.engine == "redis" ? 1 : var.node_count
+
+  memcached_node_count = min(compact([var.node_count != "" ? var.node_count : 1, 20])...)
+  node_count = var.engine == "redis" ? 1 : local.memcached_node_count
 
   vpc_id     = var.vpc_id != "" ? var.vpc_id : var.network_vpc_id
   subnet_ids = var.subnet_ids != "" ? var.subnet_ids : var.subnet_id_private
