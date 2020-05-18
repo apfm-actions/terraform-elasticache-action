@@ -1,0 +1,37 @@
+inputs:
+  engine:
+    description: 'Select between memcached or redis ElastiCache types'
+    required: true
+  engine_version:
+    description: 'Specify engine version to use'
+    required: false
+  vpc_id:
+    description: 'VPC ID to attach cluster to'
+    required: false
+  subnet_ids:
+    description: 'Comma seperated of subnet ids to attach the cluster to'
+    required: false
+  node_type:
+    description: 'AWS Instance type'
+    default: 'cache.t2.micro'
+  node_count:
+    description: 'Number of nodes in cluster to create (memcached only)'
+    default: 1
+  maintenance_window:
+    description: 'AWS Maintenance Window'
+    default: 'sun:02:30-sun:03:30'
+  debug:
+    description: 'Enabling debugging'
+    default: false
+
+outputs:
+  endpoint:
+    description: 'Replication group leader in the form of "dnsname:port"'
+  address:
+    description: 'DNS Name of the replication group leader'
+  port:
+    description: 'TCP/IP port of the replication group leader'
+
+runs:
+  using: docker
+  image: Dockerfile
