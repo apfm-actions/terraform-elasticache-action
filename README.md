@@ -14,10 +14,15 @@ Usage
       remote_state_bucket: apfm-terraform-remotestate
       remote_lock_table: terraform-statelock
       shared_state_key: /shared-infra/remotestate.file
-  - name: My ElastiCache Name
+  - name: My ElastiCache
+    id: memcached
     uses: aplaceformom/terraform-elasticache-action@master
     with:
       engine: memcached
+  - name: My ECS App
+    uses: aplaceformom/terraform-ecs-app-action@master
+    with:
+    task_env: '{MEMCACHED_ENDPOINT="${{ steps.memcached.outputs.endpoint }}"'
 ```
 
 Inputs
