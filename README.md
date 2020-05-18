@@ -16,6 +16,8 @@ Usage
       shared_state_key: /shared-infra/remotestate.file
   - name: My ElastiCache Name
     uses: aplaceformom/terraform-elasticache-action@master
+    with:
+      engine: memcached
 ```
 
 Inputs
