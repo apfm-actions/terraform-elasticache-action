@@ -1,5 +1,5 @@
 resource "aws_security_group" "default" {
-  name        = var.name
+  name        = var.github_project
   vpc_id      = data.aws_vpc.selected.id
 
   ingress {

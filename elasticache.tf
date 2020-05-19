@@ -26,17 +26,17 @@ data "aws_subnet" "selected" {
 }
 
 resource "aws_elasticache_parameter_group" "selected" {
-  name   = var.name
+  name   = var.github_project
   family = "${var.engine}${replace(local.engine_version, "/^([[:digit:]]+)[.]([[:digit:]]+).*/", "$1.$2")}"
 }
 
 resource "aws_elasticache_subnet_group" "selected" {
-  name       = "${var.name}-subnet"
+  name       = "${var.github_project}-subnet"
   subnet_ids = data.aws_subnet.selected[*].id
 }
 
 resource "aws_elasticache_cluster" "selected" {
-  cluster_id           = var.name
+  cluster_id           = var.github_project
   engine               = var.engine
   engine_version       = local.engine_version
   parameter_group_name = aws_elasticache_parameter_group.selected.name
