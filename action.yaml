@@ -5,6 +5,9 @@ inputs:
   engine_version:
     description: 'Specify engine version to use'
     required: false
+  port:
+    description: 'Specify port to listen on (default: redis=6370, memcached=11211)'
+    required: false
   vpc_id:
     description: 'VPC ID to attach cluster to'
     required: false
