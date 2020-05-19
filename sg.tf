@@ -17,8 +17,8 @@ resource "aws_security_group" "default" {
   }
 
   tags = {
-    project = var.project
-    owner   = var.owner
-    email   = var.email
+    owner   = var.project_owner
+    project = var.project_name
+    email   = var.project_email
   }
 }

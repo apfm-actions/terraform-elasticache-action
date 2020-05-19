@@ -47,8 +47,8 @@ resource "aws_elasticache_cluster" "selected" {
   maintenance_window   = local.maintenance_window
 
   tags = {
-    owner   = var.owner
-    project = var.project
-    email   = var.email
+    owner   = var.project_owner
+    project = var.project_name
+    email   = var.project_email
   }
 }
