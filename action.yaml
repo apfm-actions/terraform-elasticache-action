@@ -20,6 +20,15 @@ inputs:
   maintenance_window:
     description: 'AWS Maintenance Window'
     default: 'sun:02:30-sun:03:30'
+  plan:
+    description: 'Perform terraform plan'
+    default: true
+  deploy:
+    description: 'Perform terraform apply'
+    default: true
+  destroy:
+    description: 'Perform terraform destroy'
+    default: false
   debug:
     description: 'Enabling debugging'
     default: false
