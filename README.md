@@ -6,7 +6,7 @@ Usage
 -----
 ```yaml
   - name: My Project
-    uses: aplaceformom/terraform-project-base-action@master
+    uses: apfm-actions/terraform-project-base-action@master
     with:
       project: examples
       owner: MyTeam
@@ -16,11 +16,11 @@ Usage
       shared_state_key: /shared-infra/remotestate.file
   - name: My ElastiCache
     id: memcached
-    uses: aplaceformom/terraform-elasticache-action@master
+    uses: apfm-actions/terraform-elasticache-action@master
     with:
       engine: memcached
   - name: My ECS App
-    uses: aplaceformom/terraform-ecs-app-action@master
+    uses: apfm-actions/terraform-ecs-app-action@master
     with:
     task_env: '{MEMCACHED_ENDPOINT="${{ steps.memcached.outputs.endpoint }}"'
 ```
