@@ -1,6 +1,11 @@
 AWS Terraform ElastiCache Action
 ================================
-Deploy an AWS ElastiCache cluster using Terraform.
+A [GitHub Action][] for deploying an AWS ElastiCache instance using [Terraform][].
+
+See also:
+ - https://help.github.com/en/actions
+ - https://github.com/apfm-actions/terraform-project-base-action
+ - https://github.com/apfm-actions/terraform-ecs-app-action
 
 Memcached Usage
 ---------------
@@ -106,3 +111,12 @@ DNS name of the replication group leader
 
 ### port
 TCP/IP port of the replication group leader
+
+[//]: # (The following are reference links used elsewhere in the document)
+
+[Git]: https://git-scm.com/
+[GitHub]: https://www.github.com
+[GitHub Actions]: https://help.github.com/en/actions
+[Terraform]: https://www.terraform.io/
+[Docker]: https://www.docker.com
+[Dockerfile]: https://docs.docker.com/engine/reference/builder/
