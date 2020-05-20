@@ -2,8 +2,8 @@ AWS Terraform ElastiCache Action
 ================================
 Deploy an AWS ElastiCache cluster using Terraform.
 
-Usage
------
+Memcached Usage
+---------------
 ```yaml
   - name: My Project
     uses: apfm-actions/terraform-project-base-action@master
@@ -23,7 +23,31 @@ Usage
   - name: My ECS App
     uses: apfm-actions/terraform-ecs-app-action@master
     with:
-    task_env: '{MEMCACHED_ENDPOINT="${{ steps.memcached.outputs.endpoint }}"'
+    environment: '{MEMCACHED_ENDPOINT="${{ steps.memcached.outputs.endpoint }}"'
+```
+
+Redis Usage
+-----------
+```yaml
+  - name: My Project
+    uses: apfm-actions/terraform-project-base-action@master
+    with:
+      project: examples
+      owner: MyTeam
+      email: myteam@mydomain.org
+      workspace: dev
+      remote_state_bucket: apfm-terraform-remotestate
+      remote_lock_table: terraform-statelock
+      shared_state_key: /shared-infra/remotestate.file
+  - name: My ElastiCache
+    id: redis
+    uses: apfm-actions/terraform-elasticache-action@master
+    with:
+      engine: redis
+  - name: My ECS App
+    uses: apfm-actions/terraform-ecs-app-action@master
+    with:
+    environment: '{REDIS_ENDPOINT="${{ steps.redis.outputs.endpoint }}"'
 ```
 
 Inputs
