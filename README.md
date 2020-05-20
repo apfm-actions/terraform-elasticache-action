@@ -1,6 +1,6 @@
 AWS Terraform ElastiCache Action
 ================================
-A [GitHub Action][] for deploying an AWS ElastiCache instance using [Terraform][].
+A [GitHub Action][GitHub Actions] for deploying an AWS ElastiCache instance using [Terraform][].
 
 See also:
  - https://help.github.com/en/actions
