@@ -44,6 +44,7 @@ resource "aws_elasticache_cluster" "selected" {
   num_cache_nodes      = local.node_count
   port                 = local.port
   subnet_group_name    = aws_elasticache_subnet_group.selected.name
+  security_group_ids   = [aws_security_group.default.id]
   maintenance_window   = local.maintenance_window
 
   tags = {
