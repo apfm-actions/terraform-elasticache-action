@@ -14,6 +14,13 @@ locals {
   port = var.port != "" ? var.port : local.default_port
 
   maintenance_window = var.maintenance_window != "" ? var.maintenance_window : "sun:02:30-sun:03:30"
+
+  tags = {
+    environment = terraform.workspace
+    owner       = var.project_owner
+    project     = var.project_name
+    email       = var.project_email
+  }
 }
 
 data "aws_vpc" "selected" {
@@ -46,10 +53,5 @@ resource "aws_elasticache_cluster" "selected" {
   subnet_group_name    = aws_elasticache_subnet_group.selected.name
   security_group_ids   = [aws_security_group.default.id]
   maintenance_window   = local.maintenance_window
-
-  tags = {
-    owner   = var.project_owner
-    project = var.project_name
-    email   = var.project_email
-  }
+  tags                 = local.tags
 }
