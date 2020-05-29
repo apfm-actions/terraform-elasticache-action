@@ -7,7 +7,7 @@ resource "aws_security_group" "default" {
     from_port   = local.port
     to_port     = local.port
     protocol    = "tcp"
-    cidr_blocks = compact(data.aws_subnet.selected[*].cidr_block)
+    cidr_blocks = var.subnet_ids != "" ? compact(data.aws_subnet.selected[*].cidr_block) : [data.aws_vpc.selected.cidr_block]
   }
 
   egress {
