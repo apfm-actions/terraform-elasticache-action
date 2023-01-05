@@ -1,17 +1,17 @@
 locals {
   default_engine_version = var.engine == "redis" ? "5.0.0" : "1.5.16"
-  engine_version = var.engine_version != "" ? var.engine_version : local.default_engine_version
+  engine_version         = var.engine_version != "" ? var.engine_version : local.default_engine_version
 
-  node_type  = var.node_type != "" ? var.node_type : "cache.t2.micro"
+  node_type = var.node_type != "" ? var.node_type : "cache.t2.micro"
 
   memcached_node_count = min(compact([var.node_count != "" ? var.node_count : 1, 20])...)
-  node_count = var.engine == "redis" ? 1 : local.memcached_node_count
+  node_count           = var.engine == "redis" ? 1 : local.memcached_node_count
 
   vpc_id     = var.vpc_id != "" ? var.vpc_id : var.network_vpc_id
   subnet_ids = var.subnet_ids != "" ? var.subnet_ids : var.subnet_id_private
 
   default_port = var.engine == "redis" ? 6370 : 11211
-  port = var.port != "" ? var.port : local.default_port
+  port         = var.port != "" ? var.port : local.default_port
 
   maintenance_window = var.maintenance_window != "" ? var.maintenance_window : "sun:02:30-sun:03:30"
 
@@ -28,13 +28,16 @@ data "aws_vpc" "selected" {
 }
 
 data "aws_subnet" "selected" {
-  count = length(split(",",local.subnet_ids))
-  id    = element(split(",",local.subnet_ids), count.index)
+  count = length(split(",", local.subnet_ids))
+  id    = element(split(",", local.subnet_ids), count.index)
 }
 
 resource "aws_elasticache_parameter_group" "selected" {
-  name   = var.github_project
+  name   = "${var.github_project}-${local.engine_version}"
   family = "${var.engine}${replace(local.engine_version, "/^([[:digit:]]+)[.]([[:digit:]]+).*/", "$1.$2")}"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_elasticache_subnet_group" "selected" {
