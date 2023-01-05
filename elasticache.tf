@@ -57,4 +57,5 @@ resource "aws_elasticache_cluster" "selected" {
   security_group_ids   = [aws_security_group.default.id]
   maintenance_window   = local.maintenance_window
   tags                 = local.tags
+  apply_immediately    = true
 }
