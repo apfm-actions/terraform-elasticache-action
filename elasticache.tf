@@ -33,7 +33,7 @@ data "aws_subnet" "selected" {
 }
 
 resource "aws_elasticache_parameter_group" "selected" {
-  name   = "${var.github_project}-${local.engine_version}"
+  name   = "${var.github_project}${replace(local.engine_version, "/^([[:digit:]]+)[.]([[:digit:]]+).*/", "$1-$2")}"
   family = "${var.engine}${replace(local.engine_version, "/^([[:digit:]]+)[.]([[:digit:]]+).*/", "$1.$2")}"
   lifecycle {
     create_before_destroy = true
